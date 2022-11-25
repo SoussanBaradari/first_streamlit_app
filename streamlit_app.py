@@ -21,15 +21,14 @@ my_fruit_list = my_fruit_list.set_index('Fruit')
 # let's put a pick list here so they can pick the fruit they want to include
 fruits_selected = streamlit.multiselect("Pick some Fruits:", list(my_fruit_list.index),['Avocado', 'Strawberries'])
 fruits_to_show = my_fruit_list.loc[fruits_selected]
-
 # display the table on the page
 streamlit.dataframe(fruits_to_show)
 
 import requests
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-streamlit.header("Fruityvice Fruit Advice!")
-streamlit.text(fruityvice_response.json()) # just writes the data to the screen
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + "kiwi")
 
+streamlit.header("Fruityvice Fruit Advice!")
+# streamlit.text(fruityvice_response.json()) # just writes the data to the screen
 # take the json version of the response and normalize it
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # output it the screen as a table
