@@ -56,17 +56,5 @@ if streamlit.button('Get Fruit Load List'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     my_data_rows = get_fruit_load_list()
     streamlit.dataframe(my_data_rows)
-# streamlit.write('The user entered ', fruit_choice)
-# import requests
-# fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
-# streamlit.header("Fruityvice Fruit Advice!")
-# streamlit.text(fruityvice_response.json()) # just writes the data to the screen
-# take the json version of the response and normalize it
-# fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-# output it the screen as a table
-# streamlit.dataframe(fruityvice_normalized)
-# don't run anything past here while we troubleshoot
 streamlit.stop()
-
-
 my_cur.execute("insert into fruit_load_list values ('from streamlit')")
