@@ -17,7 +17,6 @@ my_fruit_list = my_fruit_list.set_index('Fruit')
 
 #display the table on the page
 #streamlit.dataframe(my_fruit_list)
-
 # let's put a pick list here so they can pick the fruit they want to include
 fruits_selected = streamlit.multiselect("Pick some Fruits:", list(my_fruit_list.index),['Avocado', 'Strawberries'])
 fruits_to_show = my_fruit_list.loc[fruits_selected]
@@ -35,7 +34,11 @@ fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_c
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # output it the screen as a table
 streamlit.dataframe(fruityvice_normalized)
+# don't run anything past here while we troubleshoot
+streamlit.stop()
+
 import snowflake.connector
+
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("SELECT * from fruit_load_list")
